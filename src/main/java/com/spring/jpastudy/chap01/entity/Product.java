@@ -7,7 +7,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter @ToString
+@Getter
+@ToString(exclude = {"nickName"}) // nickName 제외
+//@ToString(exclude = {"nickName", "price"}) // nickName, price 제외
 @EqualsAndHashCode(of = "id")
 //@EqualsAndHashCode(of = {"id", "name"}) // 필드명 id 랑 name 은 같은 객체란 뜻
 @NoArgsConstructor
@@ -23,6 +25,7 @@ public class Product {
     @Column(name = "prod_id")
     private Long id; // PK
 
+    @Setter
     // name -> 컬럼명 변경 /length = 30 -> VARCHAR(30) / nullable = false -> NOT NULL
     @Column(name = "prod_nm", length = 30, nullable = false)
     private String name; // 상품명
@@ -30,6 +33,7 @@ public class Product {
     @Column(name = "price")
     private int price; // 상품 가격
 
+    @Setter
     @Column(nullable = false)
     @Enumerated(EnumType.STRING) // enum 사용하려면 EnumType.STRING 으로 하기
     private Category category; // 상품 카테고리
@@ -47,6 +51,17 @@ public class Product {
 
     public enum Category {
         FOOD, FASHION, ELECTRONIC
+    }
+
+    // 컬럼 기본값 설정
+    @PrePersist
+    public void prePersist() {
+        if (this.price == 0) {
+            this.price = 10000;
+        }
+        if (this.category == null) {
+            this.category = Category.FOOD;
+        }
     }
 
 }
