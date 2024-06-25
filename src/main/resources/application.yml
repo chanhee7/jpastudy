@@ -7,3 +7,25 @@
           username: root
           password: mariadb
           driver-class-name: org.mariadb.jdbc.Driver
+        jpa:
+          # DBMS dialect setting
+          database-platform: org.hibernate.dialect.MariaDB106Dialect
+          hibernate:
+            # ddl ??? ??? ????
+            ddl-auto: create
+          properties:
+            hibernate:
+              # SQL ?? ??? ??? ??
+              format_sql: true
+          database: mysql
+
+      # log level setting
+      logging:
+        level:
+          root: info
+          com:
+            spring:
+              jpastudy: debug
+          org:
+            hibernate:
+              SQL: debug
