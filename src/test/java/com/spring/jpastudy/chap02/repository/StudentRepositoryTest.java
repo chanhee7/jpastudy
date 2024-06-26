@@ -112,4 +112,46 @@ class StudentRepositoryTest {
         students.forEach(System.out::println);
         System.out.println("\n\n\n\n");
     }
+
+    @Test
+    @DisplayName("JPQL 로 학생 조회하기")
+    void jpqlTest() {
+        //given
+        String city = "제주도";
+        //when
+        Student student = studentRepository.getByCityWithJPQL(city)
+                // .orElseThrow() -> 학생이 조회가 안되면 예외를 발생시킴
+                .orElseThrow(() -> new RuntimeException("학생 없음"));
+        //then
+        assertNotNull(student);
+
+        System.out.println("student = " + student);
+        // assertThrows() -> 에러가 나는 상황
+        // assertThrows(RuntimeException.class, () -> new RuntimeException());
+    }
+
+    @Test
+    @DisplayName("JPQL 로 이름이 포함된 학생목록 조회하기")
+    void jpqlTest2() {
+        //given
+        String containingName = "춘";
+        //when
+        List<Student> student = studentRepository.searchByNameWithJPQL(containingName);
+        //then
+        System.out.println("\n\n\n\n");
+        student.forEach(System.out::println);
+        System.out.println("\n\n\n\n");
+    }
+
+    @Test
+    @DisplayName("JPQL 로 삭제하기")
+    void deleteJpqlTest() {
+        //given
+        String name = "어피치";
+        String city = "제주도";
+        //when
+        studentRepository.deleteByNameAndCityWithJPQL(name, city);
+        //then
+        assertEquals(0, studentRepository.findByName(name).size());
+    }
 }
