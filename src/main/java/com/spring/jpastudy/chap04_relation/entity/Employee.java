@@ -26,7 +26,7 @@ public class Employee {
     // EAGER Loading: 연관된 데이터를 항상 JOIN 을 통해 같이 가져옴
     // LAZY Loading: 해당 엔터티 데이터만 가져오고 필요한 경우 연관엔터티를 가져옴
     // @ManyToOne 의 기본값 EAGER
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_id") // FK 컬럼명
     private Department department;
 
