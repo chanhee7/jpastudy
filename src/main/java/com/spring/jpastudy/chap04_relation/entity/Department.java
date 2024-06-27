@@ -47,6 +47,7 @@ public class Department {
     // @OneToMany 의 기본값 LAZY
     @OneToMany(mappedBy =  "department", fetch = FetchType.EAGER, orphanRemoval = true
             , cascade = {CascadeType.REMOVE, CascadeType.REMOVE})
+    @Builder.Default
     private List<Employee> employees = new ArrayList<>();
 
     public void removeEmployee(Employee employee) {

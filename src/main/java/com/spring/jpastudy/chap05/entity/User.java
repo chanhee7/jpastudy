@@ -26,7 +26,8 @@ public class User {
     @Column(name = "user_name")
     private String name;
 
-    // 유저가 구매 많이 함 -> @OneToMany
+    // User 1명이 Purchase 많이 함 -> @OneToMany
     @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Purchase> purchaseList = new ArrayList<>();
 }
