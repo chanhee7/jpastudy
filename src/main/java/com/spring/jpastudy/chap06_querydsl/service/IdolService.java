@@ -32,7 +32,7 @@ public class IdolService {
 //        return idolList;
 
         // 3번째
-        List<Idol> idolList = idolRepository.findByGroupName();
+        List<Idol> idolList = idolRepository.foundByGroupName();
         return idolList;
     }
 
