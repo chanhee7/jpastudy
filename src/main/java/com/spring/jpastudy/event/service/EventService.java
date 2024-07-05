@@ -42,4 +42,17 @@ public class EventService {
         return new EventOneDto(foundEvent);
     }
 
+    // 이벤트 삭제
+    public void deleteEvent(Long id) {
+        eventRepository.deleteById(id);
+    }
+
+    // 이벤트 수정
+    public void modifyEvent(EventSaveDto dto, Long id) {
+        Event foundEvent = eventRepository.findById(id).orElseThrow();
+        foundEvent.changeEvent(dto);
+
+        eventRepository.save(foundEvent);
+    }
+
 }
