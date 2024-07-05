@@ -1,12 +1,12 @@
 package com.spring.jpastudy.event.repository;
 
 import com.spring.jpastudy.event.entity.Event;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface EventRepositoryCustom {
 
-    List<Event> findEvents(String sort);
+    Page<Event> findEvents(Pageable pageable, String sort);
 
     // ...
 
